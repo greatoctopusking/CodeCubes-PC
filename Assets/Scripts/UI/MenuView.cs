@@ -87,6 +87,13 @@ namespace CodeCubesPC
             UIFactory.Place(start.GetComponent<RectTransform>(), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f),
                 new Vector2(0f, -40f), new Vector2(260f, 60f));
 
+            // 首页退出入口：原版 VR 里摘头显即退出，2D 版需要一个显式按钮，
+            // 否则全屏运行后只能靠 Alt+F4。样式与选关页的 Back 按钮一致（次要操作）。
+            Button exit = UIFactory.CreateButton("ExitButton", panel, "Exit", 22,
+                Palette.ButtonBgAlt, controller.QuitGame);
+            UIFactory.Place(exit.GetComponent<RectTransform>(), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f),
+                new Vector2(0f, -120f), new Vector2(200f, 50f));
+
             return panel;
         }
 

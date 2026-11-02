@@ -236,6 +236,20 @@ namespace CodeCubesPC
         }
 
         /// <summary>
+        /// 首页 Exit 按钮：退出游戏。
+        /// 编辑器里 Application.Quit() 不生效（只打一行日志），所以编辑模式下改为停止 Play，
+        /// 这样在 Unity 里点 Exit 的行为与打包后一致，不会出现「点了没反应」。
+        /// </summary>
+        public void QuitGame()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }
+
+        /// <summary>
         /// 对应原 LevelManager.LoadLevelByIndex(index, keepWorkspace)。
         /// keepWorkspace=false 时：清空工作区、重置关卡、按本关重建库存、放置唯一的 Start。
         /// 同一关卡重试时重建库存得到的数量与原先一致，因此总量守恒不会被破坏。
